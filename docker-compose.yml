@@ -8,10 +8,11 @@ services:
     volumes:
       - sbt:/root/.ivy2
       - sbt:/root/.sbt
-      - ./scala-seed-project:/root
+      - ./play-scala-seed:/root
     ports:
       - "9000:9000"
     command: sbt run
+    tty: true
 
 volumes:
   sbt:
