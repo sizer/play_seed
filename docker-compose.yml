@@ -6,9 +6,9 @@ services:
     environment:
       TZ: Asia/Tokyo
     volumes:
+      - ./play-scala-seed:/root
       - sbt:/root/.ivy2
       - sbt:/root/.sbt
-      - ./play-scala-seed:/root
     ports:
       - "9000:9000"
     command: sbt run
