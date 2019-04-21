@@ -1,6 +1,16 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "io.ebean:ebean-gradle-plugin:11.36.1"
+    }
+}
+
 plugins {
     id 'play'
     id 'idea'
+    id 'io.ebean'
 }
 
 def playVersion = "2.7.0"
@@ -45,18 +55,10 @@ repositories {
     }
 }
 
-// EXAMPLE: How to add JVM parameters when running `runPlayBinary`.
-// See other configurations for PlayRun here:
-// https://docs.gradle.org/current/dsl/org.gradle.play.tasks.PlayRun.html
-//
-// tasks.withType(PlayRun) {
-//     forkOptions.jvmArgs = ['-Dplay.http.secret.key=yadayada']
-// }
+ebean {
+    debugLevel = 1
+}
 
-// EXAMPLE: How to add JVM parameters to the script created by `stage`.
-// See more details here:
-// https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/application/CreateStartScripts.html
-//
-// tasks.withType(CreateStartScripts) {
-//     defaultJvmOpts = ['-Dplay.http.secret.key=yadayada']
-// }
+test {
+    testLogging.showStandardStreams = true
+}
