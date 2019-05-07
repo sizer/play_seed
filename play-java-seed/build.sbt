@@ -9,3 +9,4 @@ lazy val root = (project in file("."))
 scalaVersion := "2.12.8"
 
 libraryDependencies += guice
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.18"

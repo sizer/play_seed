@@ -1,5 +1,8 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import play.api.mvc.Session;
+import play.libs.Json;
 import play.mvc.*;
 
 /**
@@ -15,7 +18,24 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        return ok(views.html.index.render());
+        java.util.Optional<java.lang.String> uuid = session().getOptional("uuid");
+        if(uuid.isPresent()) {
+            return ok(comeBackResponse());
+        } else {
+            session("uuid", "hogehoge");
+            return ok(firstTimeResponse());
+        }
     }
 
+    private ObjectNode firstTimeResponse() {
+        ObjectNode response = Json.newObject();
+        response.put("message", "hello!");
+        return response;
+    }
+
+    private ObjectNode comeBackResponse() {
+        ObjectNode response = Json.newObject();
+        response.put("message", "yay! you came back here!!");
+        return response;
+    }
 }

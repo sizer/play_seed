@@ -1,3 +1,4 @@
 .ivy2
 .sbt
 target
+.idea

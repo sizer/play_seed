@@ -1,5 +1,6 @@
 package models;
 
+import java.util.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
