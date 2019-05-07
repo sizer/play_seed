@@ -52,6 +52,12 @@ BEGIN
   EXECUTE stmt;
 END
 $$
+create table links (
+  id                            bigint auto_increment not null,
+  uuid                          varchar(255),
+  constraint pk_links primary key (id)
+);
+
 create table task (
   id                            bigint auto_increment not null,
   name                          varchar(255),
@@ -62,6 +68,8 @@ create table task (
 
 
 # --- !Downs
+
+drop table if exists links;
 
 drop table if exists task;
 

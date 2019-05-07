@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import models.Link;
 import play.api.mvc.Session;
 import play.libs.Json;
 import play.mvc.*;
@@ -20,22 +21,26 @@ public class HomeController extends Controller {
     public Result index() {
         java.util.Optional<java.lang.String> uuid = session().getOptional("uuid");
         if(uuid.isPresent()) {
-            return ok(comeBackResponse());
+            return ok(comeBackResponse(uuid.orElse("some thing wrong...")));
         } else {
-            session("uuid", "hogehoge");
-            return ok(firstTimeResponse());
+            String newid = java.util.UUID.randomUUID().toString();
+            session("uuid", newid);
+            Link l = new Link();
+            l.uuid = newid;
+            l.save();
+            return ok(firstTimeResponse(newid));
         }
     }
 
-    private ObjectNode firstTimeResponse() {
+    private ObjectNode firstTimeResponse(String newid) {
         ObjectNode response = Json.newObject();
-        response.put("message", "hello!");
+        response.put("message", "hello! your id is " + newid );
         return response;
     }
 
-    private ObjectNode comeBackResponse() {
+    private ObjectNode comeBackResponse(String uuid) {
         ObjectNode response = Json.newObject();
-        response.put("message", "yay! you came back here!!");
+        response.put("message", "yay! you came back here!! your id is " + uuid);
         return response;
     }
 }

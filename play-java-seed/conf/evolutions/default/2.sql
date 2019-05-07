@@ -7,3 +7,5 @@ CREATE TABLE Links (
 );
 
 -- !Downs
+
+DROP TABLE Links;
